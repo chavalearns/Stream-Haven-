@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Haven V2 - Stream Planner</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="no-sidebar">
+  <nav class="top-nav">
+    <div class="nav-brand"><h2>🌙 Stream Haven</h2></div>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="planner.html" class="active">Streams</a>
+      <a href="content-planner.html">Content</a>
+      <a href="goals.html">Goals</a>
+      <a href="game.html">Game</a>
+      <a href="ideas.html">Ideas</a>
+      <a href="growth.html">Growth</a>
+      <a href="links.html">Links</a>
+      <a href="themes.html">Themes</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="settings.html">Settings</a>
+    </div>
+    <div class="nav-user">
+      <span class="account-name">Account</span>
+      <div id="userEmail"></div>
+    </div>
+  </nav>
+
+  <main class="main-content-full">
+    <div class="page-header">
+      <h1>📅 Stream Planner</h1>
+      <p>Schedule and manage your streams</p>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <h3 style="margin-bottom:1rem;color:var(--accent)">Schedule a Stream</h3>
+      <div class="form-inline">
+        <div class="form-group">
+          <label for="streamTitle">Stream Title</label>
+          <input type="text" id="streamTitle" placeholder="What are you streaming?">
+        </div>
+        <div class="form-group">
+          <label for="streamDate">Date & Time</label>
+          <input type="datetime-local" id="streamDate">
+        </div>
+        <button class="btn btn-primary" onclick="addStream()">Add Stream</button>
+      </div>
+    </div>
+
+    <div class="items-list" id="streamsList"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-auth.js"></script>
+  <script src="js/supabase-app.js"></script>
+  <script>window.onDataLoaded = loadStreams;</script>
+</body>
+</html>

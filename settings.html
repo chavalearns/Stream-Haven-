@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Haven V2 - Settings</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="no-sidebar">
+  <nav class="top-nav">
+    <div class="nav-brand"><h2>🌙 Stream Haven</h2></div>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="planner.html">Streams</a>
+      <a href="content-planner.html">Content</a>
+      <a href="goals.html">Goals</a>
+      <a href="game.html">Game</a>
+      <a href="ideas.html">Ideas</a>
+      <a href="growth.html">Growth</a>
+      <a href="links.html">Links</a>
+      <a href="themes.html">Themes</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="settings.html" class="active">Settings</a>
+    </div>
+    <div class="nav-user">
+      <span class="account-name">Account</span>
+      <div id="userEmail"></div>
+    </div>
+  </nav>
+
+  <main class="main-content-full">
+    <div class="page-header">
+      <h1>⚙️ Settings</h1>
+      <p>Manage your account and preferences</p>
+    </div>
+
+    <div class="card">
+      <!-- Profile Section -->
+      <div class="settings-section">
+        <h3>Profile</h3>
+        <div class="settings-row">
+          <span class="settings-label">Name</span>
+          <span class="settings-value" id="settingsName">Loading...</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Email</span>
+          <span class="settings-value" id="settingsEmail">Loading...</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Active Account</span>
+          <span class="settings-value account-name">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Appearance Section -->
+      <div class="settings-section">
+        <h3>Appearance</h3>
+        <div class="settings-row">
+          <span class="settings-label">Dark Mode</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Theme</span>
+          <a href="themes.html" class="btn btn-sm btn-secondary">Customize →</a>
+        </div>
+      </div>
+
+      <!-- Data Section -->
+      <div class="settings-section">
+        <h3>Data Management</h3>
+        <div class="settings-row">
+          <span class="settings-label">Export all data as JSON</span>
+          <button class="btn btn-sm btn-primary" onclick="exportData()">Export Data</button>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Clear all data for current account</span>
+          <button class="btn btn-sm btn-danger" onclick="clearAllData()">Clear All Data</button>
+        </div>
+      </div>
+
+      <!-- Account Section -->
+      <div class="settings-section">
+        <h3>Account</h3>
+        <div class="settings-row">
+          <span class="settings-label">Sign out of Stream Haven</span>
+          <button class="btn btn-sm btn-danger" onclick="logOut()">Log Out</button>
+        </div>
+      </div>
+
+      <!-- App Info -->
+      <div class="settings-section">
+        <h3>About</h3>
+        <div class="settings-row">
+          <span class="settings-label">Version</span>
+          <span class="settings-value">Stream Haven V2.0.0</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Built with</span>
+          <span class="settings-value">Supabase + Vanilla JS</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-auth.js"></script>
+  <script src="js/supabase-app.js"></script>
+  <script>window.onDataLoaded = loadSettingsPage;</script>
+</body>
+</html>

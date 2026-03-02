@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Haven V2 - Dashboard</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="no-sidebar">
+  <nav class="top-nav">
+    <div class="nav-brand"><h2>🌙 Stream Haven</h2></div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="planner.html">Streams</a>
+      <a href="content-planner.html">Content</a>
+      <a href="goals.html">Goals</a>
+      <a href="game.html">Game</a>
+      <a href="ideas.html">Ideas</a>
+      <a href="growth.html">Growth</a>
+      <a href="links.html">Links</a>
+      <a href="themes.html">Themes</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="settings.html">Settings</a>
+    </div>
+    <div class="nav-user">
+      <span class="account-name">Account</span>
+      <div id="userEmail"></div>
+    </div>
+  </nav>
+
+  <main class="main-content-full">
+    <div class="page-header">
+      <h1 id="welcomeMsg">Welcome back!</h1>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Hero Card -->
+      <div class="hero-card" id="heroContent">
+        <h2>Loading...</h2>
+      </div>
+
+      <!-- Stats Overview -->
+      <div class="widget-card" style="grid-column: 1 / -1">
+        <div class="widget-header"><h3>📊 Follower Stats</h3></div>
+        <div class="stats-grid" id="statsGrid"></div>
+      </div>
+
+      <!-- This Week Widget -->
+      <div class="widget-card">
+        <div class="widget-header"><h3>📅 This Week</h3><span class="widget-badge">Weekly</span></div>
+        <div id="weekWidget"></div>
+        <div class="widget-footer"><a href="calendar.html">View Calendar →</a></div>
+      </div>
+
+      <!-- Current Goal Widget -->
+      <div class="widget-card">
+        <div class="widget-header"><h3>🎯 Current Goal</h3><span class="widget-badge">Latest</span></div>
+        <div id="goalWidget"></div>
+        <div class="widget-footer"><a href="goals.html">All Goals →</a></div>
+      </div>
+
+      <!-- Recent Ideas Widget -->
+      <div class="widget-card">
+        <div class="widget-header"><h3>💡 Recent Ideas</h3><span class="widget-badge">New</span></div>
+        <div id="ideasWidget"></div>
+        <div class="widget-footer"><a href="ideas.html">Idea Vault →</a></div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="widget-card" style="grid-column: 1 / -1">
+        <div class="widget-header"><h3>⚡ Quick Actions</h3></div>
+        <div class="quick-actions">
+          <a href="planner.html" class="quick-action-btn"><span>📅</span>Schedule Stream</a>
+          <a href="content-planner.html" class="quick-action-btn"><span>📋</span>Plan Content</a>
+          <a href="ideas.html" class="quick-action-btn"><span>💡</span>Save Idea</a>
+          <a href="growth.html" class="quick-action-btn"><span>📈</span>Update Stats</a>
+          <a href="goals.html" class="quick-action-btn"><span>🎯</span>Track Goals</a>
+          <a href="links.html" class="quick-action-btn"><span>🔗</span>Quick Links</a>
+        </div>
+      </div>
+
+      <!-- Motivational Quote -->
+      <div class="quote-card" id="quoteCard"></div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-auth.js"></script>
+  <script src="js/supabase-app.js"></script>
+  <script>window.onDataLoaded = loadDashboard;</script>
+</body>
+</html>

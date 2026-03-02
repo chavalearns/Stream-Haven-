@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Haven V2 - Growth Tracker</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="no-sidebar">
+  <nav class="top-nav">
+    <div class="nav-brand"><h2>🌙 Stream Haven</h2></div>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="planner.html">Streams</a>
+      <a href="content-planner.html">Content</a>
+      <a href="goals.html">Goals</a>
+      <a href="game.html">Game</a>
+      <a href="ideas.html">Ideas</a>
+      <a href="growth.html" class="active">Growth</a>
+      <a href="links.html">Links</a>
+      <a href="themes.html">Themes</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="settings.html">Settings</a>
+    </div>
+    <div class="nav-user">
+      <span class="account-name">Account</span>
+      <div id="userEmail"></div>
+    </div>
+  </nav>
+
+  <main class="main-content-full">
+    <div class="page-header">
+      <h1>📈 Growth Tracker</h1>
+      <p>Track your follower counts across platforms</p>
+    </div>
+
+    <!-- Current Stats -->
+    <div class="growth-grid" id="growthGrid" style="margin-bottom:1.5rem"></div>
+    <p id="lastUpdated" style="text-align:center;color:var(--text-secondary);font-size:0.85rem;margin-bottom:1.5rem"></p>
+
+    <!-- Update Form -->
+    <div class="card">
+      <h3 style="margin-bottom:1rem;color:var(--accent)">Update Follower Counts</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="growthTwitch">📺 Twitch</label>
+          <input type="number" id="growthTwitch" value="0" min="0">
+        </div>
+        <div class="form-group">
+          <label for="growthYoutube">▶️ YouTube</label>
+          <input type="number" id="growthYoutube" value="0" min="0">
+        </div>
+        <div class="form-group">
+          <label for="growthTiktok">🎵 TikTok</label>
+          <input type="number" id="growthTiktok" value="0" min="0">
+        </div>
+        <div class="form-group">
+          <label for="growthInstagram">📸 Instagram</label>
+          <input type="number" id="growthInstagram" value="0" min="0">
+        </div>
+      </div>
+      <div style="margin-top:1rem">
+        <button class="btn btn-primary" onclick="saveGrowthStats()">Save Stats</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-auth.js"></script>
+  <script src="js/supabase-app.js"></script>
+  <script>window.onDataLoaded = loadGrowthStats;</script>
+</body>
+</html>

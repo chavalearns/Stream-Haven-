@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Haven V2 - Themes</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="no-sidebar">
+  <nav class="top-nav">
+    <div class="nav-brand"><h2>🌙 Stream Haven</h2></div>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="planner.html">Streams</a>
+      <a href="content-planner.html">Content</a>
+      <a href="goals.html">Goals</a>
+      <a href="sims.html">Game</a>
+      <a href="ideas.html">Ideas</a>
+      <a href="growth.html">Growth</a>
+      <a href="links.html">Links</a>
+      <a href="themes.html" class="active">Themes</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="settings.html">Settings</a>
+    </div>
+    <div class="nav-user">
+      <span class="account-name">Account</span>
+      <div id="userEmail"></div>
+    </div>
+  </nav>
+
+  <main class="main-content-full">
+    <div class="page-header">
+      <h1>🎨 Themes</h1>
+      <p>Customize your dashboard appearance</p>
+      <p id="currentThemeDisplay" style="color:var(--accent);margin-top:0.5rem;font-size:0.9rem"></p>
+    </div>
+
+    <!-- Mode Toggle -->
+    <div class="card" style="margin-bottom:1.5rem">
+      <h3 style="margin-bottom:1rem;color:var(--accent)">Display Mode</h3>
+      <div class="mode-toggle-group">
+        <button class="mode-btn" data-mode="dark" onclick="setThemeMode('dark')">🌙 Dark Mode</button>
+        <button class="mode-btn" data-mode="light" onclick="setThemeMode('light')">☀️ Light Mode</button>
+      </div>
+    </div>
+
+    <!-- Theme Grid -->
+    <div class="theme-grid">
+      <div class="theme-preset" data-theme="lavender" onclick="setTheme('lavender')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #c4b5fd, #a78bfa)"></div>
+        <div class="theme-name">Lavender</div>
+        <div class="theme-label">Purple</div>
+      </div>
+      <div class="theme-preset" data-theme="rose" onclick="setTheme('rose')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #fda4af, #fb7185)"></div>
+        <div class="theme-name">Rose</div>
+        <div class="theme-label">Pink</div>
+      </div>
+      <div class="theme-preset" data-theme="mint" onclick="setTheme('mint')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #86efac, #4ade80)"></div>
+        <div class="theme-name">Mint</div>
+        <div class="theme-label">Green</div>
+      </div>
+      <div class="theme-preset" data-theme="sky" onclick="setTheme('sky')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #7dd3fc, #38bdf8)"></div>
+        <div class="theme-name">Sky</div>
+        <div class="theme-label">Blue</div>
+      </div>
+      <div class="theme-preset" data-theme="peach" onclick="setTheme('peach')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #fdba74, #fb923c)"></div>
+        <div class="theme-name">Peach</div>
+        <div class="theme-label">Orange</div>
+      </div>
+      <div class="theme-preset" data-theme="coral" onclick="setTheme('coral')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #f9a8d4, #f472b6)"></div>
+        <div class="theme-name">Coral</div>
+        <div class="theme-label">Hot Pink</div>
+      </div>
+      <div class="theme-preset" data-theme="lemon" onclick="setTheme('lemon')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #fde047, #facc15)"></div>
+        <div class="theme-name">Lemon</div>
+        <div class="theme-label">Yellow</div>
+      </div>
+      <div class="theme-preset" data-theme="aqua" onclick="setTheme('aqua')">
+        <div class="theme-swatch" style="background:linear-gradient(135deg, #5eead4, #2dd4bf)"></div>
+        <div class="theme-name">Aqua</div>
+        <div class="theme-label">Teal</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-auth.js"></script>
+  <script src="js/supabase-app.js"></script>
+  <script>window.onDataLoaded = loadThemesPage;</script>
+</body>
+</html>
