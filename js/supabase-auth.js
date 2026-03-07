@@ -151,7 +151,8 @@ async function loadUserData() {
           user_id: window.currentUser.id,
           current_account_id: window.userAccounts[0].id,
           pastel_theme: 'lavender',
-          theme_mode: 'dark'
+          theme_mode: 'dark',
+          onboarding_completed: false
         })
         .select()
         .single();
@@ -159,6 +160,12 @@ async function loadUserData() {
     }
 
     window.userSettings = settings;
+
+    // Check if onboarding is needed
+    if (settings && !settings.onboarding_completed && !window.location.pathname.includes('onboarding.html')) {
+      window.location.href = 'onboarding.html';
+      return;
+    }
 
     // Determine current account
     if (settings && settings.current_account_id) {

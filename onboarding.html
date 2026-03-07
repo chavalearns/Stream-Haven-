@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Stream Haven V2</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .onboarding-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .onboarding-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 40px var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 10;
+    }
+
+    .onboarding-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .onboarding-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .onboarding-progress {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3rem;
+      gap: 0.5rem;
+    }
+
+    .progress-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .progress-dot.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    .progress-dot.completed {
+      background: var(--success);
+    }
+
+    .onboarding-step {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .onboarding-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-icon {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .step-title {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: var(--text-primary);
+    }
+
+    .step-description {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px var(--shadow);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .onboarding-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .btn-skip {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.75rem 2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-skip:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      opacity: 0.1;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .shape:nth-child(1) {
+      width: 200px;
+      height: 200px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      top: 70%;
+      right: 10%;
+      animation-delay: 5s;
+    }
+
+    .shape:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      bottom: 10%;
+      left: 50%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-20px) rotate(90deg); }
+      50% { transform: translateY(10px) rotate(180deg); }
+      75% { transform: translateY(-10px) rotate(270deg); }
+    }
+
+    .theme-preview {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .theme-option {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+      position: relative;
+    }
+
+    .theme-option:hover {
+      transform: scale(1.1);
+    }
+
+    .theme-option.selected {
+      border-color: var(--text-primary);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .theme-option.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 0 4px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body data-theme="lavender" class="no-sidebar">
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <div class="onboarding-container">
+    <div class="onboarding-card">
+      <div class="onboarding-header">
+        <h1>Welcome to Stream Haven</h1>
+        <p style="color: var(--text-secondary);">Your streaming journey starts here</p>
+      </div>
+
+      <div class="onboarding-progress">
+        <div class="progress-dot active" data-step="1"></div>
+        <div class="progress-dot" data-step="2"></div>
+        <div class="progress-dot" data-step="3"></div>
+        <div class="progress-dot" data-step="4"></div>
+        <div class="progress-dot" data-step="5"></div>
+      </div>
+
+      <!-- Step 1: Welcome -->
+      <div class="onboarding-step active" data-step="1">
+        <div class="step-icon">🌙</div>
+        <h2 class="step-title">Welcome to Your New Dashboard!</h2>
+        <p class="step-description">
+          Stream Haven V2 is your all-in-one streaming dashboard. Track your growth, plan content, manage streams, and connect with your audience - all in one beautiful place.
+        </p>
+        <div class="onboarding-actions">
+          <button class="btn btn-primary" onclick="nextStep()">Let's Start →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Features Overview -->
+      <div class="onboarding-step" data-step="2">
+        <div class="step-icon">🚀</div>
+        <h2 class="step-title">Everything You Need to Grow</h2>
+        <p class="step-description">
+          Discover the powerful features designed to help you succeed as a streamer:
+        </p>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <div class="feature-title">Smart Scheduling</div>
+            <div class="feature-description">Plan streams and content with ease</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <div class="feature-title">Growth Tracking</div>
+            <div class="feature-description">Monitor your progress over time</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">Goal Setting</div>
+            <div class="feature-description">Set and achieve your streaming goals</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <div class="feature-title">Idea Vault</div>
+            <div class="feature-description">Never run out of content ideas</div>
+          </div>
+        </div>
+        <div class="onboarding-actions">
+          <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Choose Theme -->
+      <div class="onboarding-step" data-step="3">
+        <div class="step-icon">🎨</div>
+        <h2 class="step-title">Make It Yours</h2>
+        <p class="step-description">
+          Choose your favorite color theme to personalize your dashboard:
+        </p>
+        <div class="theme-preview">
+          <div class="theme-option" style="background: linear-gradient(135deg, #c4b5fd, #a78bfa)" data-theme="lavender" onclick="selectTheme('lavender')"></div>
+          <div class="theme-option" style="background: linear-gradient(135deg, #fda4af, #fb7185)" data-theme="rose" onclick="selectTheme('rose')"></div>
+          <div class="theme-option" style="background: linear-gradient(135deg, #86efac, #4ade80)" data-theme="mint" onclick="selectTheme('mint')"></div>
+          <div class="theme-option" style="background: linear-gradient(135deg, #7dd3fc, #38bdf8)" data-theme="sky" onclick="selectTheme('sky')"></div>
+          <div class="theme-option" style="background: linear-gradient(135deg, #fdba74, #fb923c)" data-theme="peach" onclick="selectTheme('peach')"></div>
+          <div class="theme-option" style="background: linear-gradient(135deg, #f9a8d4, #f472b6)" data-theme="coral" onclick="selectTheme('coral')"></div>
+          <div class="theme-option" style="background: linear-gradient(135deg, #fde047, #facc15)" data-theme="lemon" onclick="selectTheme('lemon')"></div>
+          <div class="theme-option" style="background: linear-gradient(135deg, #5eead4, #2dd4bf)" data-theme="aqua" onclick="selectTheme('aqua')"></div>
+        </div>
+        <div class="onboarding-actions">
+          <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep()" id="themeNext" disabled>Select Theme →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Quick Setup -->
+      <div class="onboarding-step" data-step="4">
+        <div class="step-icon">⚡</div>
+        <h2 class="step-title">Quick Setup Tips</h2>
+        <p class="step-description">
+          Here are a few things to get you started:
+        </p>
+        <div style="text-align: left; max-width: 400px; margin: 0 auto;">
+          <div style="margin-bottom: 1.5rem;">
+            <strong>🎯 Set Your First Goal</strong><br>
+            <span style="color: var(--text-secondary);">What do you want to achieve this month?</span>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <strong>📅 Schedule Your First Stream</strong><br>
+            <span style="color: var(--text-secondary);">Plan when you'll go live next</span>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <strong>💡 Save Content Ideas</strong><br>
+            <span style="color: var(--text-secondary);">Never run out of things to stream</span>
+          </div>
+        </div>
+        <div class="onboarding-actions">
+          <button class="btn btn-secondary" onclick="previousStep()">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep()">Almost There →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Ready to Go -->
+      <div class="onboarding-step" data-step="5">
+        <div class="step-icon">🎉</div>
+        <h2 class="step-title">You're All Set!</h2>
+        <p class="step-description">
+          Welcome to the Stream Haven family! Your dashboard is ready and waiting. Remember, this is your space to grow, create, and connect with your audience.
+        </p>
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🌟</div>
+          <p style="color: var(--accent); font-weight: 600;">Happy streaming!</p>
+        </div>
+        <div class="onboarding-actions">
+          <button class="btn btn-primary" onclick="finishOnboarding()">Go to Dashboard →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-auth.js"></script>
+  <script>
+    let currentStep = 1;
+    let selectedTheme = 'lavender';
+
+    function updateProgress() {
+      document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+        dot.classList.remove('active', 'completed');
+        if (index < currentStep - 1) {
+          dot.classList.add('completed');
+        } else if (index === currentStep - 1) {
+          dot.classList.add('active');
+        }
+      });
+    }
+
+    function showStep(step) {
+      document.querySelectorAll('.onboarding-step').forEach(s => s.classList.remove('active'));
+      document.querySelector(`[data-step="${step}"]`).classList.add('active');
+      updateProgress();
+    }
+
+    function nextStep() {
+      if (currentStep < 5) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    function previousStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+
+    function selectTheme(theme) {
+      selectedTheme = theme;
+      document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('selected'));
+      document.querySelector(`[data-theme="${theme}"]`).classList.add('selected');
+      
+      // Apply theme preview
+      if (typeof applyTheme === 'function') {
+        applyTheme(theme, 'dark');
+      }
+      
+      // Enable next button
+      document.getElementById('themeNext').disabled = false;
+    }
+
+    async function finishOnboarding() {
+      // Save selected theme to user settings
+      if (window.currentUser && window.supabaseClient) {
+        try {
+          await window.supabaseClient
+            .from('user_settings')
+            .update({ 
+              pastel_theme: selectedTheme,
+              onboarding_completed: true 
+            })
+            .eq('user_id', window.currentUser.id);
+        } catch (e) {
+          console.error('Failed to save onboarding settings:', e);
+        }
+      }
+
+      // Redirect to dashboard
+      window.location.href = 'index.html';
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if user is authenticated
+      if (!window.currentUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Apply default theme
+      if (typeof applyTheme === 'function') {
+        applyTheme('lavender', 'dark');
+      }
+
+      // Mark body as loaded
+      document.body.classList.add('data-loaded');
+    });
+  </script>
+</body>
+</html>

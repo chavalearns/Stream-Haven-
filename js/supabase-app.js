@@ -1007,3 +1007,19 @@ async function clearAllData() {
     showNotification('All data cleared!');
   } catch (e) { showNotification(e.message, 'error'); }
 }
+
+// Restart onboarding tutorial
+async function restartOnboarding() {
+  if (!window.currentUser || !window.supabaseClient) return;
+  
+  try {
+    await window.supabaseClient
+      .from('user_settings')
+      .update({ onboarding_completed: false })
+      .eq('user_id', window.currentUser.id);
+    
+    window.location.href = 'onboarding.html';
+  } catch (e) {
+    showNotification('Failed to restart tutorial', 'error');
+  }
+}

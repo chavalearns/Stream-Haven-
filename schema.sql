@@ -199,6 +199,7 @@ CREATE TABLE public.user_settings (
   current_account_id UUID REFERENCES public.accounts ON DELETE SET NULL,
   pastel_theme TEXT DEFAULT 'lavender',
   theme_mode TEXT DEFAULT 'dark',
+  onboarding_completed BOOLEAN DEFAULT false,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 

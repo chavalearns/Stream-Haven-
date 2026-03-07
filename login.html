@@ -79,7 +79,21 @@
 
       try {
         await signIn(email, password);
-        window.location.href = 'index.html';
+        // Check if onboarding is needed
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
+        if (session) {
+          const { data: settings } = await window.supabaseClient
+            .from('user_settings')
+            .select('onboarding_completed')
+            .eq('user_id', session.user.id)
+            .single();
+          
+          if (settings && !settings.onboarding_completed) {
+            window.location.href = 'onboarding.html';
+          } else {
+            window.location.href = 'index.html';
+          }
+        }
       } catch (err) {
         errEl.textContent = err.message || 'Sign in failed';
       }
@@ -100,7 +114,8 @@
 
       try {
         await signUp(name, email, password);
-        window.location.href = 'index.html';
+        // New users go directly to onboarding
+        window.location.href = 'onboarding.html';
       } catch (err) {
         errEl.textContent = err.message || 'Sign up failed';
       }
