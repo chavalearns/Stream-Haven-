@@ -269,5 +269,7 @@ function showNotification(message, type = 'success') {
 }
 
 // Initialize on page load
-loadThemeFromSettings();
+if (!window.location.pathname.includes('landing.html')) {
+  loadThemeFromSettings();
+}
 document.addEventListener('DOMContentLoaded', checkAuth);
