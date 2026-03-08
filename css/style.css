@@ -26,8 +26,24 @@
 /* --- Anti-Flicker System --- */
 .account-name, #userEmail { opacity: 0; transition: opacity 0.3s ease; }
 body.data-loaded .account-name, body.data-loaded #userEmail { opacity: 1; }
-body:not([data-theme]) { visibility: hidden; }
-body[data-theme] { visibility: visible; }
+
+/* Prevent flash of unstyled content */
+body:not(.data-loaded) {
+  visibility: hidden;
+}
+
+body.data-loaded {
+  visibility: visible;
+}
+
+/* Theme transition prevention during load */
+body:not(.data-loaded) * {
+  transition: none !important;
+}
+
+body.data-loaded * {
+  transition: revert !important;
+}
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

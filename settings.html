@@ -6,6 +6,17 @@
   <title>Stream Haven V2 - Settings</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Prevent theme flicker by loading theme immediately
+    (function() {
+      const theme = localStorage.getItem('streamHavenTheme') || 'lavender';
+      const mode = localStorage.getItem('streamHavenMode') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-mode', mode);
+      document.body.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-mode', mode);
+    })();
+  </script>
 </head>
 <body class="no-sidebar">
   <nav class="top-nav">

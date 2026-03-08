@@ -19,6 +19,10 @@ function applyTheme(themeName, mode) {
   const isDark = mode !== 'light';
   const root = document.documentElement;
 
+  // Save to localStorage for immediate loading on next page
+  localStorage.setItem('streamHavenTheme', themeName);
+  localStorage.setItem('streamHavenMode', mode || 'dark');
+
   root.setAttribute('data-theme', themeName);
   root.setAttribute('data-mode', mode || 'dark');
 
