@@ -65,6 +65,9 @@ function applyTheme(themeName, mode) {
 
 // Load theme from settings BEFORE page renders
 async function loadThemeFromSettings() {
+  // Apply default theme immediately to prevent flicker
+  applyTheme('lavender', 'dark');
+  
   try {
     const { data: { session } } = await window.supabaseClient.auth.getSession();
     if (!session) return;
@@ -77,11 +80,10 @@ async function loadThemeFromSettings() {
 
     if (settings) {
       applyTheme(settings.pastel_theme || 'lavender', settings.theme_mode || 'dark');
-    } else {
-      applyTheme('lavender', 'dark');
     }
   } catch (e) {
-    applyTheme('lavender', 'dark');
+    // Keep default theme if error occurs
+    console.error('Theme loading error:', e);
   }
 }
 
