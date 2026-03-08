@@ -7,6 +7,11 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
   <style>
+    /* Override anti-flicker for landing page */
+    body {
+      visibility: visible !important;
+    }
+    
     .landing-container {
       min-height: 100vh;
       display: flex;
@@ -247,7 +252,7 @@
     }
   </style>
 </head>
-<body>
+<body class="data-loaded">
   <div class="landing-container">
     <div class="floating-shapes">
       <div class="shape"></div>
