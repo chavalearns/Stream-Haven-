@@ -222,11 +222,17 @@ async function signUp(name, email, password) {
     email: email,
     password: password,
     options: {
-      data: { name: name }
+      data: { name: name },
+      emailRedirectTo: window.location.origin + '/login.html'
     }
   });
 
   if (error) throw error;
+
+  // Check if user needs email confirmation
+  if (data.user && !data.user.email_confirmed_at) {
+    throw new Error('Please check your email to confirm your account before signing in.');
+  }
 
   // Small delay to let trigger run
   await new Promise(r => setTimeout(r, 1000));

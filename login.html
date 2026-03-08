@@ -61,6 +61,9 @@
           <label for="signupConfirm">Confirm Password</label>
           <input type="password" id="signupConfirm" placeholder="Confirm password" required>
         </div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+          💡 You'll receive a confirmation email after signing up
+        </p>
         <button type="submit" class="btn btn-primary">Create Account</button>
         <div id="signupError" class="login-error"></div>
       </form>
@@ -97,7 +100,16 @@
         await signIn(email, password);
         window.location.href = 'dashboard.html';
       } catch (err) {
-        errEl.textContent = err.message || 'Sign in failed';
+        let errorMessage = err.message || 'Sign in failed';
+        
+        // Provide more helpful error messages
+        if (errorMessage.includes('Invalid login credentials')) {
+          errorMessage = 'Invalid email or password. If you just signed up, please check your email to confirm your account first.';
+        } else if (errorMessage.includes('Email not confirmed')) {
+          errorMessage = 'Please check your email to confirm your account before signing in.';
+        }
+        
+        errEl.textContent = errorMessage;
       }
     }
 
