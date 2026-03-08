@@ -6,13 +6,25 @@
   <title>Stream Haven V2 - Your Streaming Dashboard</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
-  <style>
+  <script>
+    // Prevent theme flicker by loading theme immediately
+    (function() {
+      const theme = localStorage.getItem('streamHavenTheme') || 'lavender';
+      const mode = localStorage.getItem('streamHavenMode') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-mode', mode);
+      document.body.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-mode', mode);
+    })();
+  </script>
+</head>
+<style>
     .hero-container {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #1a1033, #2d1b69);
+      background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
       padding: 2rem;
       position: relative;
       overflow: hidden;
@@ -186,7 +198,7 @@
     .shape {
       position: absolute;
       border-radius: 50%;
-      background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
       opacity: 0.1;
       animation: float 20s infinite ease-in-out;
     }
@@ -287,7 +299,7 @@
     }
   </style>
 </head>
-<body>
+<body class="data-loaded">
   <div class="hero-container">
     <div class="floating-shapes">
       <div class="shape"></div>
