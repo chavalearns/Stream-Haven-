@@ -60,6 +60,11 @@
   <script src="js/supabase-config.js"></script>
   <script src="js/supabase-auth.js"></script>
   <script>
+    // Check for signup hash and show signup tab
+    if (window.location.hash === '#signup') {
+      showTab('signup');
+    }
+
     function showTab(tab) {
       document.querySelectorAll('.login-tab').forEach((t, i) => {
         t.classList.toggle('active', (tab === 'signin' && i === 0) || (tab === 'signup' && i === 1));
