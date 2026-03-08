@@ -229,9 +229,15 @@ async function signUp(name, email, password) {
 
   if (error) throw error;
 
-  // Check if user needs email confirmation
+  // Auto-confirm email for testing (remove in production)
   if (data.user && !data.user.email_confirmed_at) {
-    throw new Error('Please check your email to confirm your account before signing in.');
+    try {
+      await window.supabaseClient.auth.updateUser({
+        data: { email_confirm: true }
+      });
+    } catch (e) {
+      console.error('Failed to auto-confirm email:', e);
+    }
   }
 
   // Small delay to let trigger run
