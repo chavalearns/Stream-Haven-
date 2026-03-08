@@ -167,12 +167,6 @@ async function loadUserData() {
 
     window.userSettings = settings;
 
-    // Check if onboarding is needed
-    if (settings && !settings.onboarding_completed && !window.location.pathname.includes('onboarding.html')) {
-      window.location.href = 'onboarding.html';
-      return;
-    }
-
     // Determine current account
     if (settings && settings.current_account_id) {
       window.currentAccount = window.userAccounts.find(a => a.id === settings.current_account_id);
@@ -275,7 +269,5 @@ function showNotification(message, type = 'success') {
 }
 
 // Initialize on page load
-if (!window.location.pathname.includes('landing.html')) {
-  loadThemeFromSettings();
-}
+loadThemeFromSettings();
 document.addEventListener('DOMContentLoaded', checkAuth);
